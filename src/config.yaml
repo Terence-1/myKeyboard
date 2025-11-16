@@ -1,0 +1,371 @@
+meta:
+  engine: 4.1.0
+points:
+  zones:
+    matrix:
+      key:
+        padding: cy
+        spread: cx
+      columns:
+        pinky:
+          key.column_net: C0
+        ring:
+          key:
+            stagger: 6
+            column_net: C1
+        middle:
+          key.column_net: C2
+        index:
+          key.column_net: C3
+        inner:
+          key.column_net: C4
+      rows:
+        bottom:
+          row_net: R2
+        home:
+          row_net: R1
+        top:
+          row_net: R0
+    thumb:
+      key:
+        padding: cy
+        spread: cx
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [0, -cy - 4]
+      columns:
+        left:
+          key.column_net: C4
+        right:
+          key:
+            splay: -35
+            origin: [-cx / 2, -cy / 2]
+            column_net: C5
+      rows:
+        cluster:
+          row_net: R3
+outlines:
+  line_1:
+    - what: polygon
+      points:
+        - ref: matrix_ring_top
+          shift: [(-cx / 2), (cy / 2) + 1.5]
+        - ref: matrix_pinky_top
+          shift: [(cx / 2) - 3, (cy / 2) + 6.75]
+  line_2:
+    - what: polygon
+      points:
+        - ref: matrix_pinky_bottom
+          shift: [(cx / 2), (-cy / 2) - 1.5]
+        - ref: matrix_pinky_bottom
+          shift: [(cx / 2) + 4, (-cy / 2) - 0.75]
+  lines:
+    - what: outline
+      name: line_1
+      operation: add
+    - what: outline
+      name: line_2
+      operation: add
+  mounting_1:
+    - what: circle
+      radius: 3.75
+      where:
+        - ref: matrix_pinky_top
+          shift: [(cx / 2) - 3, (cy / 2) + 3]
+  mounting_2:
+    - what: circle
+      radius: 3.75
+      where:
+        - ref: matrix_pinky_bottom
+          shift: [(cx / 2) + 4, (-cy / 2) + 3]
+  mounting_3:
+    - what: circle
+      radius: 3.75
+      where:
+        - ref: thumb_left_cluster
+          shift: [(cx / 2) + 4, (cy / 2)]
+  mounting_4:
+    - what: circle
+      radius: 3.75
+      where:
+        - ref: matrix_index_top
+          shift: [(cx / 2), (-cy / 2)]
+  mountings:
+    - what: outline
+      name: mounting_1
+      operation: add
+    - what: outline
+      name: mounting_2
+      operation: add
+    - what: outline
+      name: mounting_3
+      operation: add
+    - what: outline
+      name: mounting_4
+      operation: add
+  promicroOutline:
+    - what: rectangle
+      where:
+        - ref: matrix_inner_home
+          shift: [cx + 5, (-cy / 2) + 7]
+      size: [20, 35]
+  promicroGap:
+    - what: rectangle
+      where:
+        - ref: matrix_inner_home
+          shift: [(cx / 2), (-cy / 2) + 7]
+      size: [10, 35]
+  promicro:
+    - what: outline
+      name: promicroOutline
+      operation: add
+    - what: outline
+      name: promicroGap
+      operation: add
+  trssCover:
+    - what: rectangle
+      where:
+        - ref: matrix_inner_home
+          shift: [cx + 5, -cy - 10]
+      size: [20, 35]
+  trssGap:
+    - what: rectangle
+      where:
+        - ref: matrix_inner_home
+          shift: [(cx / 2), -cy - 10]
+      size: [10, 35]
+  trss:
+    - what: outline
+      name: trssCover
+      operation: add
+    - what: outline
+      name: trssGap
+      operation: add
+  raw:
+    - what: rectangle
+      where: true
+      size: [cx + 3, cy + 3]
+  thumb:
+    - what: polygon
+      points:
+        - ref: thumb_left_cluster
+          shift: [(-cx / 2) - 1.5, (cy / 2) + 4]
+        - ref: thumb_left_cluster
+          shift: [(cx / 2) + 1.5, (cy / 2) + 4]
+        - ref: thumb_right_cluster
+          shift: [(-cx / 2) - 1.5, (cy / 2) + 1.5]
+        - ref: thumb_right_cluster
+          shift: [(cx / 2) + 1.5, (cy / 2) + 1.5]
+        - ref: thumb_right_cluster
+          shift: [(cx / 2) + 1.5, (-cy / 2) - 1.5]
+        - ref: thumb_left_cluster
+          shift: [(cx / 2), (-cy / 2) - 1.5]
+        - ref: thumb_left_cluster
+          shift: [(-cx / 2) - 1.5, (-cy / 2) - 1.5]
+  keycapsOutline:
+    - what: rectangle
+      where: true
+      size: [cx - 0.5, cy - 0.5]
+  pcbEdge:
+    - what: outline
+      name: raw
+      operation: add
+    - what: outline
+      name: thumb
+      operation: add
+    - what: outline
+      name: promicro
+      operation: add
+    - what: outline
+      name: trss
+      operation: add
+    - what: outline
+      name: mountings
+      operation: add
+    - what: outline
+      name: pcbEdge
+      fillet: 1
+  keyswitches:
+    - what: rectangle
+      where: true
+      size: [14, 14]
+  plateEdge:
+    - what: outline
+      name: raw
+      operation: add
+    - what: outline
+      name: thumb
+      operation: add
+    - what: outline
+      name: mountings
+      operation: add
+    - operation: subtract
+      name: keyswitches
+    - what: outline
+      name: plateEdge
+      fillet: 1
+pcbs:
+  dofeKeyboard_main:
+    outlines:
+      keycaps:
+        outline: keycapsOutline
+        layer: Eco1.User
+      edge:
+        outline: pcbEdge
+    footprints:
+      choc:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: true
+          hotswap: true
+          from: "{{colrow}}"
+          to: "{{column_net}}"
+        adjust:
+          rotate: 180
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, (cy / 2) - 3]
+          rotate: 180
+      trrs:
+        what: trrs
+        params:
+          reverse: true
+          A: VCC
+          B: DATA
+          C: GND
+          D: ''
+        where:
+          ref: matrix_inner_bottom
+          rotate: -90
+          shift: [cx + 15, (-cy / 2)]
+      promicro:
+        what: promicro_pretty
+        params:
+          reversible: true
+          P21: C5
+          P20: C4
+          P19: C3
+          P18: C2
+          P15: C1
+          P14: C0
+          P5: R3
+          P4: R2
+          P3: R1
+          P2: R0
+          P0: DATA          
+        where:
+          ref: matrix_inner_home
+          shift: [cx + 5, (-cy / 2) + 7]
+      mounting_1:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 3.5
+        where:
+          ref: matrix_pinky_top
+          shift: [(cx / 2) - 3, (cy / 2) + 3]
+      mounting_2:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 3.5
+        where:
+          ref: matrix_pinky_bottom
+          shift: [(cx / 2) + 4, (-cy / 2) + 3]
+      mounting_3:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 3.5
+        where:
+          ref: thumb_left_cluster
+          shift: [(cx / 2) + 4, (cy / 2)]
+      mounting_4:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 3.5
+        where:
+          ref: matrix_index_top
+          shift: [(cx / 2), (-cy / 2)]
+  dofeKeyboard_topPlate:
+    outlines:
+      edge:
+        outline: plateEdge
+    footprints:
+      mounting_1:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: matrix_pinky_top
+          shift: [(cx / 2) - 3, (cy / 2) + 3]
+      mounting_2:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: matrix_pinky_bottom
+          shift: [(cx / 2) + 4, (-cy / 2) + 3]
+      mounting_3:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: thumb_left_cluster
+          shift: [(cx / 2) + 4, (cy / 2)]
+      mounting_4:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: matrix_index_top
+          shift: [(cx / 2), (-cy / 2)]
+  dofeKeyboard_bottomPlate:
+    outlines:
+      edge:
+        outline: pcbEdge
+    footprints:
+      mounting_1:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: matrix_pinky_top
+          shift: [(cx / 2) - 3, (cy / 2) + 3]
+      mounting_2:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: matrix_pinky_bottom
+          shift: [(cx / 2) + 4, (-cy / 2) + 3]
+      mounting_3:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: thumb_left_cluster
+          shift: [(cx / 2) + 4, (cy / 2)]
+      mounting_4:
+        what: mounting_hole
+        params:
+          outline: 0.5
+          drill: 2
+        where:
+          ref: matrix_index_top
+          shift: [(cx / 2), (-cy / 2)]
