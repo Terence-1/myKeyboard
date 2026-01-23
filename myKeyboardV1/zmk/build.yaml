@@ -6,9 +6,9 @@
 
 ---
 include:
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: terence0_left
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: terence0_right
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: terence0_dongle
