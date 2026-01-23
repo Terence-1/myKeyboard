@@ -1,17 +1,37 @@
 # Copyright (c) 2025 Terence Ng
 # SPDX-License-Identifier: MIT
 
-if SHIELD_DOFE_LEFT
+if SHIELD_0TERENCE_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "Dofe"
+    default "0terence Left"
+
+config ZMK_SPLIT_ROLE_PERIPHERAL
+    default y
+
+endif
+
+if SHIELD_0TERENCE_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "0terence Right"
+
+config ZMK_SPLIT_ROLE_PERIPHERAL
+    default y
+
+endif
+
+if SHIELD_0TERENCE_DONGLE
+
+config ZMK_KEYBOARD_NAME
+    default "0terence"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
 endif
 
-if SHIELD_DOFE_LEFT || SHIELD_DOFE_RIGHT
+if SHIELD_0TERENCE_LEFT || SHIELD_0TERENCE_RIGHT || SHIELD_0TERENCE_DONGLE
 
 config ZMK_SPLIT
     default y

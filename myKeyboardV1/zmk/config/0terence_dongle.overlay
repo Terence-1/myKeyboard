@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2025 Terence Ng
+ * SPDX-License-Identifier: MIT
+ */
+
+/ {
+    chosen {
+        zmk,kscan = &kscan_composite;
+    };
+
+    kscan_composite: kscan_composite {
+        compatible = "zmk,kscan-composite";
+        rows = <4>;
+        columns = <10>;
+
+        // Left half
+        left {
+            kscan = <&kscan_left>;
+            row-offset = <0>;
+            column-offset = <0>;
+        };
+
+        // Right half  
+        right {
+            kscan = <&kscan_right>;
+            row-offset = <0>;
+            column-offset = <5>;
+        };
+    };
+
+    kscan_left: kscan_left {
+        compatible = "zmk,kscan-composite-child";
+    };
+
+    kscan_right: kscan_right {
+        compatible = "zmk,kscan-composite-child";
+    };
+};
+
+#include "0terence.dtsi"
