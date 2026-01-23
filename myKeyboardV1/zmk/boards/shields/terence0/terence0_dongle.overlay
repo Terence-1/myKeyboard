@@ -12,6 +12,7 @@
 
 / {
     chosen {
-        zmk,kscan = &kscan0;
+        // Remove zmk,kscan reference - dongle doesn't need it
+        /delete-property/ zmk,kscan;
     };
 };
