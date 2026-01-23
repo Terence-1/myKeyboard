@@ -36,4 +36,7 @@ if SHIELD_TERENCE0_LEFT || SHIELD_TERENCE0_RIGHT || SHIELD_TERENCE0_DONGLE
 config ZMK_SPLIT
     default y
 
+config ZMK_BLE
+    default y
+
 endif
