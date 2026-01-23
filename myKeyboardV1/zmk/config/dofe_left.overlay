@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) 2025 Terence Ng
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "dofe.dtsi"
+
+&kscan0 {
+    col-gpios
+        = <&pro_micro 6 GPIO_ACTIVE_HIGH>   // GP29
+        , <&pro_micro 5 GPIO_ACTIVE_HIGH>   // GP28
+        , <&pro_micro 4 GPIO_ACTIVE_HIGH>   // GP27
+        , <&pro_micro 3 GPIO_ACTIVE_HIGH>   // GP26
+        , <&pro_micro 2 GPIO_ACTIVE_HIGH>   // GP22
+        , <&pro_micro 1 GPIO_ACTIVE_HIGH>   // GP20
+        ;
+
+    row-gpios
+        = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // GP6
+        , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // GP7
+        , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // GP8
+        , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // GP9
+        ;
+};

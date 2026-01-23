@@ -1,0 +1,12 @@
+# Copyright (c) 2025 Terence Ng
+# SPDX-License-Identifier: MIT
+
+# This file generates the GitHub Actions matrix
+# For a list of boards, see https://docs.zmk.dev/docs/development/boards-shields-keymaps
+
+---
+include:
+  - board: nice_nano_v2
+    shield: dofe_left
+  - board: nice_nano_v2
+    shield: dofe_right

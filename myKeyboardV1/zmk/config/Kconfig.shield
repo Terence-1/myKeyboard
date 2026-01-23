@@ -1,0 +1,8 @@
+# Copyright (c) 2025 Terence Ng
+# SPDX-License-Identifier: MIT
+
+config SHIELD_DOFE_LEFT
+    def_bool $(shields_list_contains,dofe_left)
+
+config SHIELD_DOFE_RIGHT
+    def_bool $(shields_list_contains,dofe_right)
