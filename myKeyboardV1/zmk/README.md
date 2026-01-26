@@ -110,7 +110,6 @@ After making changes, rebuild and reflash the firmware.
 - **High power consumption on peripherals**: Disable USB logging in `terence0.conf`
 - **Can't pair dongle with computer**: Use BT_CLR key in layer 5 to clear bonds
 - **Keys not working**: Check pin assignments in overlay files match your wiring
-- **High power consumption**: Disable USB logging in `dofe.conf`
 
 ## Resources
 
